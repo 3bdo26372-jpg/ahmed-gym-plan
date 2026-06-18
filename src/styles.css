@@ -50,6 +50,8 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outlin
 .header-nav button { position: relative; }
 .header-nav button.active { color: var(--accent); background: rgba(212,175,55,.08); font-weight: 700; }
 .header-nav button.active::after { content: ''; position: absolute; left: 13px; right: 13px; bottom: 3px; height: 1px; background: var(--accent); }
+.header-nav .nutrition-tab { display: flex; align-items: center; gap: 6px; }
+.header-nav .nutrition-tab svg { width: 14px; height: 14px; }
 .header-actions { display: flex; align-items: center; gap: 9px; }
 .language-switch { height: 38px; padding: 0 12px; border: 1px solid var(--border); border-radius: 20px; display: flex; align-items: center; gap: 7px; background: var(--surface); color: var(--muted); font: 700 10px 'DM Sans'; letter-spacing: .05em; transition: border-color .2s ease, background-color .2s ease; }
 .language-switch:hover { border-color: rgba(212,175,55,.48); background: rgba(30,41,59,.72); }
@@ -146,6 +148,56 @@ footer span { color: var(--text); font-weight: 700; }
 .app[dir='rtl'] .lightbox-close { right: auto; left: 14px; }
 @keyframes lightbox-in { from { opacity: 0; transform: scale(.975); } to { opacity: 1; transform: scale(1); } }
 
+.nutrition-page { width: min(1180px, calc(100% - 48px)); margin: 0 auto; padding-bottom: 100px; animation: app-fade .4s ease-out both; }
+.nutrition-hero { padding: 48px 0 42px; display: grid; grid-template-columns: minmax(0,1fr) 430px; align-items: center; gap: 55px; border-bottom: 1px solid var(--border); }
+.nutrition-hero h1 { max-width: 650px; margin: 12px 0 14px; font: 700 clamp(40px,5vw,62px)/1.04 'Manrope'; letter-spacing: -.055em; }
+.nutrition-hero > div:first-child > p { max-width: 610px; margin: 0; color: var(--muted); font-size: 14px; line-height: 1.65; }
+.profile-card { padding: 23px; border: 1px solid rgba(212,175,55,.32); border-radius: 16px; background: var(--surface); }
+.profile-heading { display: flex; align-items: center; gap: 9px; padding-bottom: 16px; border-bottom: 1px solid var(--border); color: var(--accent); font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.profile-heading svg { width: 17px; }
+.profile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 22px; padding-top: 17px; }
+.profile-grid div { display: grid; gap: 4px; }
+.profile-grid span { color: var(--muted); font-size: 10px; }
+.profile-grid strong { font: 700 15px 'Manrope'; }
+.nutrition-section { padding: 58px 0 0; }
+.nutrition-heading { margin-bottom: 25px; }
+.nutrition-heading h2 { margin: 7px 0 6px; font: 700 31px 'Manrope'; letter-spacing: -.04em; }
+.nutrition-heading > p { max-width: 650px; margin: 0; color: var(--muted); font-size: 12px; line-height: 1.6; }
+.target-grid { display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); gap: 12px; }
+.target-card { min-height: 142px; padding: 20px; border: 1px solid var(--border); border-radius: 14px; background: var(--surface); display: flex; flex-direction: column; animation: card-rise .4s ease-out both; transition: transform .22s ease, border-color .22s ease; }
+.target-card:hover { transform: translateY(-3px); border-color: rgba(212,175,55,.4); }
+.target-card svg { width: 19px; color: var(--accent); }
+.target-card span { margin-top: auto; color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: .08em; }
+.target-card strong { margin-top: 5px; font: 700 17px 'Manrope'; }
+.meal-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 16px; }
+.meal-card { min-height: 285px; padding: 22px; border: 1px solid var(--border); border-radius: 15px; background: var(--surface); animation: card-rise .42s ease-out both; transition: transform .22s ease, border-color .22s ease; }
+.meal-card:hover { transform: translateY(-3px); border-color: rgba(212,175,55,.4); }
+.meal-top { display: flex; justify-content: space-between; align-items: center; color: var(--accent); }
+.meal-top span { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: rgba(212,175,55,.1); font-size: 9px; font-weight: 700; }
+.meal-top svg { width: 18px; }
+.meal-title { margin: 18px 0 16px; padding-bottom: 14px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 9px; }
+.meal-title h3 { margin: 0; font: 700 21px 'Manrope'; letter-spacing: -.03em; }
+.meal-title small { padding: 4px 7px; border-radius: 10px; background: rgba(212,175,55,.1); color: var(--accent); font-size: 8px; text-transform: uppercase; }
+.meal-card ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 11px; }
+.meal-card li { display: flex; align-items: flex-start; gap: 9px; color: var(--muted); font-size: 11px; line-height: 1.45; }
+.meal-card li svg { flex: 0 0 auto; width: 14px; height: 14px; margin-top: 1px; color: var(--accent); }
+.nutrition-bottom { padding-top: 58px; display: grid; grid-template-columns: 1.15fr .85fr; gap: 18px; }
+.rules-card, .day-guidance { padding: 26px; border: 1px solid var(--border); border-radius: 16px; background: var(--surface); }
+.rules-card ol { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 0 24px; }
+.rules-card li { min-height: 52px; display: flex; align-items: center; gap: 11px; border-top: 1px solid var(--border); color: var(--muted); font-size: 11px; line-height: 1.45; }
+.rules-card li > span { color: var(--accent); font: 700 9px 'Manrope'; }
+.day-guidance > article { display: flex; gap: 13px; padding: 17px 0; border-top: 1px solid var(--border); }
+.day-guidance > article > svg { flex: 0 0 auto; width: 19px; color: var(--accent); }
+.day-guidance h3 { margin: 0 0 5px; font: 700 16px 'Manrope'; }
+.day-guidance p { margin: 0; color: var(--muted); font-size: 11px; line-height: 1.55; }
+.disclaimer { margin-top: 7px; padding: 15px; border-radius: 11px; display: flex; gap: 10px; background: rgba(212,175,55,.08); color: var(--accent); }
+.disclaimer svg { flex: 0 0 auto; width: 17px; }
+.disclaimer p { margin: 0; color: var(--muted); font-size: 10px; line-height: 1.55; }
+.app[dir='rtl'] .nutrition-hero h1,
+.app[dir='rtl'] .nutrition-heading h2,
+.app[dir='rtl'] .meal-title h3,
+.app[dir='rtl'] .day-guidance h3 { font-family: 'Noto Sans Arabic',sans-serif; letter-spacing: 0; }
+
 @keyframes app-fade {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -173,10 +225,14 @@ footer span { color: var(--text); font-weight: 700; }
   .header-nav button { flex: 0 0 auto; white-space: nowrap; }
   .intro { padding-top: 38px; }
   .exercise-media { height: 280px; }
+  .nutrition-hero { grid-template-columns: 1fr; gap: 28px; }
+  .target-grid { grid-template-columns: repeat(3,minmax(0,1fr)); }
+  .meal-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .nutrition-bottom { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 680px) {
-  .site-header, .intro, .workout-section, footer { width: calc(100% - 32px); }
+  .site-header, .intro, .workout-section, .nutrition-page, footer { width: calc(100% - 32px); }
   .site-header { min-height: 112px; }
   .intro { padding: 32px 0 28px; display: block; }
   .intro h1 { margin-top: 12px; font-size: 39px; }
@@ -199,6 +255,19 @@ footer span { color: var(--text); font-weight: 700; }
   .image-lightbox { padding: 12px; }
   .lightbox-dialog { width: 100%; height: min(760px, 88vh); border-radius: 14px; }
   .lightbox-caption { min-height: 62px; padding: 13px 17px; display: grid; gap: 2px; }
+  .nutrition-page { padding-bottom: 70px; }
+  .nutrition-hero { padding: 34px 0 30px; }
+  .nutrition-hero h1 { font-size: 39px; }
+  .target-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .target-card { min-height: 125px; }
+  .target-card:last-child { grid-column: 1 / 3; }
+  .meal-grid { grid-template-columns: 1fr; }
+  .meal-card { min-height: 0; }
+  .nutrition-section { padding-top: 45px; }
+  .nutrition-bottom { padding-top: 45px; }
+  .rules-card, .day-guidance { padding: 21px; }
+  .rules-card ol { grid-template-columns: 1fr; }
+  .profile-card { padding: 20px; }
   footer { min-height: 90px; }
   footer p { display: none; }
 }

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
-import { ArrowUpRight, Clock3, Dumbbell, Gauge, Maximize2, Target, X } from 'lucide-react'
+import { Apple, ArrowUpRight, Check, Clock3, Droplets, Dumbbell, Flame, Gauge, Info, Maximize2, Moon, Scale, Target, Utensils, X, Zap } from 'lucide-react'
 import { dayArabic, exerciseArabic, muscleArabic, ui, type Language } from './i18n'
+import { nutritionContent } from './nutrition'
 import { exercisesForDay, workoutDays, type Exercise } from './workouts'
 
 function ExerciseCard({ exercise, index, language, onPreview }: { exercise: Exercise; index: number; language: Language; onPreview: (exercise: Exercise) => void }) {
@@ -37,15 +38,76 @@ function ExerciseCard({ exercise, index, language, onPreview }: { exercise: Exer
   )
 }
 
+function NutritionPage({ language }: { language: Language }) {
+  const content = nutritionContent[language]
+  const titleLines = content.title.split('\n')
+  const targetIcons = [Flame, Dumbbell, Zap, Apple, Droplets]
+
+  return (
+    <div className="nutrition-page" key={language}>
+      <section className="nutrition-hero">
+        <div>
+          <span className="section-label">{content.kicker}</span>
+          <h1>{titleLines[0]}<br />{titleLines[1]}</h1>
+          <p>{content.intro}</p>
+        </div>
+        <div className="profile-card">
+          <div className="profile-heading"><Scale /><span>{content.profileTitle}</span></div>
+          <div className="profile-grid">
+            {content.profile.map((item) => <div key={item.label}><span>{item.label}</span><strong>{item.value}</strong></div>)}
+          </div>
+        </div>
+      </section>
+
+      <section className="nutrition-section targets-section">
+        <div className="nutrition-heading"><span className="section-label">01</span><h2>{content.targetsTitle}</h2><p>{content.targetsNote}</p></div>
+        <div className="target-grid">
+          {content.targets.map((target, index) => {
+            const Icon = targetIcons[index]
+            return <article className="target-card" key={target.label}><Icon /><span>{target.label}</span><strong>{target.value}</strong></article>
+          })}
+        </div>
+      </section>
+
+      <section className="nutrition-section">
+        <div className="nutrition-heading"><span className="section-label">02</span><h2>{content.mealsTitle}</h2><p>{content.mealsIntro}</p></div>
+        <div className="meal-grid">
+          {content.meals.map((meal) => (
+            <article className="meal-card" key={meal.number}>
+              <div className="meal-top"><span>{meal.number}</span><Utensils /></div>
+              <div className="meal-title"><h3>{meal.name}</h3>{meal.optional && <small>{meal.optional}</small>}</div>
+              <ul>{meal.foods.map((food) => <li key={food}><Check />{food}</li>)}</ul>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="nutrition-bottom">
+        <article className="rules-card">
+          <div className="nutrition-heading"><span className="section-label">03</span><h2>{content.rulesTitle}</h2></div>
+          <ol>{content.rules.map((rule, index) => <li key={rule}><span>{String(index + 1).padStart(2, '0')}</span>{rule}</li>)}</ol>
+        </article>
+        <div className="day-guidance">
+          <div className="nutrition-heading"><span className="section-label">04</span><h2>{content.dayTitle}</h2></div>
+          <article><Zap /><div><h3>{content.trainingDay.title}</h3><p>{content.trainingDay.text}</p></div></article>
+          <article><Moon /><div><h3>{content.restDay.title}</h3><p>{content.restDay.text}</p></div></article>
+          <aside className="disclaimer"><Info /><p>{content.disclaimer}</p></aside>
+        </div>
+      </section>
+    </div>
+  )
+}
+
 export default function App() {
   const initialId = window.location.hash.replace('#/', '')
-  const [activeId, setActiveId] = useState(workoutDays.some((day) => day.id === initialId) ? initialId : workoutDays[0].id)
+  const [activeId, setActiveId] = useState(initialId === 'nutrition' || workoutDays.some((day) => day.id === initialId) ? initialId : workoutDays[0].id)
   const [language, setLanguage] = useState<Language>(() => localStorage.getItem('ahmed-gym-language') === 'ar' ? 'ar' : 'en')
   const [preview, setPreview] = useState<Exercise | null>(null)
   const activeDay = workoutDays.find((day) => day.id === activeId) ?? workoutDays[0]
   const exercises = exercisesForDay(activeDay)
   const text = ui[language]
   const isArabic = language === 'ar'
+  const isNutrition = activeId === 'nutrition'
 
   useEffect(() => {
     document.documentElement.lang = language
@@ -89,6 +151,9 @@ export default function App() {
               {isArabic ? dayArabic[day.id].label : day.label}
             </button>
           ))}
+          <button className={isNutrition ? 'active nutrition-tab' : 'nutrition-tab'} onClick={() => chooseDay('nutrition')}>
+            <Apple />{nutritionContent[language].nav}
+          </button>
         </nav>
         <div className="header-actions">
           <button className="language-switch" onClick={() => setLanguage(isArabic ? 'en' : 'ar')} aria-label={text.switchLabel}>
@@ -98,6 +163,7 @@ export default function App() {
       </header>
 
       <main>
+        {isNutrition ? <NutritionPage language={language} /> : <>
         <section className="intro">
           <div className="intro-copy">
             <span className="section-label">{text.kicker}</span>
@@ -131,6 +197,7 @@ export default function App() {
             <div><span>{text.overload}</span><h3>{text.ready}</h3><p>{text.reminderStart} <strong>2.5–5%</strong> {text.reminderEnd}</p></div>
           </aside>
         </section>
+        </>}
       </main>
 
       <footer><span>{text.brand} {text.brandSub}</span><p>{text.footer}</p></footer>
