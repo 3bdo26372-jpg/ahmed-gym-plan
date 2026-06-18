@@ -8,7 +8,7 @@ export const ui = {
     strength: '4 strength', cardio: '2 cardio', sessions: 'Six focused sessions', session: 'Session', exercises: 'Exercises',
     sets: 'Sets & reps', effort: 'Effort', rest: 'Rest', technique: 'Technique', why: 'Why this exercise',
     overload: 'Progressive overload', ready: 'Ready for more?', reminderStart: 'If all reps are completed with good form, increase weight by', reminderEnd: 'next week.',
-    footer: 'Consistency over intensity. Keep showing up.', switchLabel: 'Switch to Arabic',
+    footer: 'Consistency over intensity. Keep showing up.', switchLabel: 'Switch to Arabic', openImage: 'Open full image', closeImage: 'Close image',
   },
   ar: {
     brand: 'أحمد', brandSub: 'خطة التمرين', navLabel: 'أيام التمرين', openMenu: 'فتح القائمة', closeMenu: 'إغلاق القائمة',
@@ -17,7 +17,7 @@ export const ui = {
     strength: '٤ تمارين قوة', cardio: 'يومان كارديو', sessions: 'ست حصص مركّزة', session: 'الحصة', exercises: 'تمارين',
     sets: 'المجموعات والتكرارات', effort: 'المجهود', rest: 'الراحة', technique: 'طريقة الأداء', why: 'لماذا هذا التمرين؟',
     overload: 'الزيادة التدريجية', ready: 'هل أنت مستعد للمزيد؟', reminderStart: 'إذا أكملت كل التكرارات بأداء صحيح، زِد الوزن بنسبة', reminderEnd: 'الأسبوع القادم.',
-    footer: 'الاستمرارية أهم من الشدة. واصل الحضور.', switchLabel: 'Switch to English',
+    footer: 'الاستمرارية أهم من الشدة. واصل الحضور.', switchLabel: 'Switch to English', openImage: 'فتح الصورة كاملة', closeImage: 'إغلاق الصورة',
   },
 } as const
 
